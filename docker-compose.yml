@@ -1,0 +1,53 @@
+version: '2'
+services:
+     vote:
+       #build: ./vote/
+       image: kutekroma/examplevotingapp_vote:v1
+       ports: ["5000:80"]
+       depends_on:
+         - redis
+         - db
+       networks:
+         - front-tier
+         - back-tier
+     
+     result:
+        #build: ./result/
+        image: kutekroma/examplevotingapp_result:v1
+        ports: ["5001:80"]
+        depends_on:
+         - redis
+         - db
+        networks:
+         - front-tier
+         - back-tier
+    
+     worker:
+        #build: ./worker/
+        image: kutekroma/examplevotingapp_worker:v1
+        depends_on:
+         - redis
+         - db
+        networks:
+         - back-tier
+    
+     redis:
+        image: redis:alpine
+        networks: 
+         - back-tier
+
+     db:
+        image: postgres:9.4
+        environment:
+          POSTGRES_USER: "postgres"
+          POSTGRES_PASSWORD: "postgres"
+        volumes:
+          - "db-data:/var/lib/postgresql/data"
+        networks:
+          - back-tier
+volumes:
+    db-data:
+
+networks:
+    front-tier:
+    back-tier:        
