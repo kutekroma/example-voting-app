@@ -1,0 +1,44 @@
+---
+- name: Deploy containers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Include vars
+      include_vars:
+        dir: vars
+
+    - name: Make dir
+      file:
+        path: /tmp/votingapp
+        state: directory
+
+    - name: Copy DC file
+      template:
+        src: templates/docker-compose.j2
+        dest: /tmp/votingapp/docker-compose.yml
+        force: yes
+
+    - name: Stop all docker containers
+      shell:
+        cmd: docker stop $(docker ps -q)
+      ignore_errors: true
+      tags:
+        - docker-cleanup
+
+    - name: Remove all unused and dangling docker images
+      shell:
+        cmd: docker system prune --all --force
+      tags:
+        - docker-cleanup
+
+    - name: Setup with docker-compose
+      shell:
+        cmd: docker-compose up -d
+        chdir: /tmp/votingapp
+      register: contdeploy
+      tags:
+        - container-setup
+
+    - name: Display result
+      debug:
+        msg: "Log from docker-compose: \n {{ contdeploy.stdout }}\n"

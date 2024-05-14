@@ -1,5 +1,8 @@
 FROM node:18-slim
 
+LABEL "Project" = "Voting-App"
+LABEL "Author" = "Lazo A."
+
 # add curl for healthcheck
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
