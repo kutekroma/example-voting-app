@@ -469,3 +469,8 @@
 }
 2024-05-14 17:40:26,606 p=30542 u=root n=ansible | PLAY RECAP ***********************************************************************************************************
 2024-05-14 17:40:26,606 p=30542 u=root n=ansible | app01-staging              : ok=8    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-05-14 18:14:45,158 p=30796 u=vagrant n=ansible | Decryption successful
+2024-05-14 18:17:46,929 p=30817 u=vagrant n=ansible | ERROR! The vault-ids data,default are available to encrypt. Specify the vault-id to encrypt with --encrypt-vault-id
+2024-05-14 18:18:01,074 p=30820 u=vagrant n=ansible | ERROR! The vault-ids data,default are available to encrypt. Specify the vault-id to encrypt with --encrypt-vault-id
+2024-05-14 18:19:06,478 p=30823 u=vagrant n=ansible | ERROR! The vault-ids data,default are available to encrypt. Specify the vault-id to encrypt with --encrypt-vault-id
+2024-05-14 18:19:38,260 p=30843 u=vagrant n=ansible | Encryption successful

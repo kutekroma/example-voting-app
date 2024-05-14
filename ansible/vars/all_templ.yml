@@ -1,0 +1,9 @@
+POSTGRES_USER: "postgres"
+POSTGRES_PASSWORD: "{{vault_postgr_pass}}" 
+LOCAL_REGISTRY: "acm:5000"
+IMAGE_VERSION: "v1"
+IMAGE_VOTE: "examplevotingapp_vote"
+IMAGE_RESULT: "examplevotingapp_result"
+IMAGE_WORKER: "examplevotingapp_worker"
+
+
